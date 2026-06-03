@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NearbyServicesScreen extends StatefulWidget {
   const NearbyServicesScreen({super.key});
@@ -229,7 +230,7 @@ class _NearbyServicesScreenState extends State<NearbyServicesScreen> {
           children: [
           // Google Map Area
           Container(
-            height: 250,
+            height: 250.h,
             decoration: BoxDecoration(
               color: theme.colorScheme.surfaceContainerHighest,
             ),
@@ -252,18 +253,18 @@ class _NearbyServicesScreenState extends State<NearbyServicesScreen> {
           // Filter Chips
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             child: Row(
               children: _categories.map((category) {
                 final isSelected = _selectedCategoryType == category['type'];
                 return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
+                  padding: EdgeInsets.only(right: 8.0.w),
                   child: FilterChip(
                     selected: isSelected,
                     label: Text(category['label']),
                     avatar: Icon(
                       category['icon'],
-                      size: 18,
+                      size: 18.w,
                       color: isSelected
                           ? theme.colorScheme.onSecondaryContainer
                           : theme.colorScheme.onSurfaceVariant,
@@ -298,7 +299,7 @@ class _NearbyServicesScreenState extends State<NearbyServicesScreen> {
                     ),
                   )
                 : ListView.builder(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     itemCount: _placesList.length,
                     itemBuilder: (context, index) {
                       final place = _placesList[index];
@@ -336,7 +337,7 @@ class _NearbyServicesScreenState extends State<NearbyServicesScreen> {
                       if (_selectedCategoryType == 'restaurant') listIcon = Icons.restaurant;
 
                       return Card(
-                        margin: const EdgeInsets.only(bottom: 12),
+                        margin: EdgeInsets.only(bottom: 12.h),
                         child: ListTile(
                           leading: Icon(
                             listIcon,

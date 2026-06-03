@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -13,13 +14,13 @@ class CustomBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 80.h,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         border: Border(
           top: BorderSide(
             color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            width: 1,
+            width: 1.w,
           ),
         ),
       ),
@@ -75,25 +76,25 @@ class CustomBottomNav extends StatelessWidget {
 
     return InkWell(
       onTap: () => onTap(index),
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(12.r),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         decoration: isEmergency && isSelected
             ? BoxDecoration(
                 color: colorScheme.errorContainer.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               )
             : null,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: itemColor, size: 24),
-            const SizedBox(height: 4),
+            Icon(icon, color: itemColor, size: 24.w),
+            SizedBox(height: 4.h),
             Text(
               label,
               style: Theme.of(
                 context,
-              ).textTheme.labelMedium?.copyWith(color: itemColor, fontSize: 11),
+              ).textTheme.labelMedium?.copyWith(color: itemColor, fontSize: 11.sp),
             ),
           ],
         ),

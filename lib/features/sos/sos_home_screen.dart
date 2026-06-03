@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -242,22 +243,22 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
   void _showNonEmergencyOptions() {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
       ),
       builder: (BuildContext context) {
         return SafeArea(
           child: Wrap(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0.w),
                 child: Text(
                   'Non-Emergency Contacts',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.local_police),
+                leading: Icon(Icons.local_police, size: 24.w),
                 title: const Text('Police Helpline'),
                 subtitle: const Text('Dial 15'),
                 onTap: () {
@@ -266,7 +267,7 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.medical_services),
+                leading: Icon(Icons.medical_services, size: 24.w),
                 title: const Text('Edhi Ambulance'),
                 subtitle: const Text('Dial 115'),
                 onTap: () {
@@ -275,7 +276,7 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.car_crash),
+                leading: Icon(Icons.car_crash, size: 24.w),
                 title: const Text('Motorway Police'),
                 subtitle: const Text('Dial 130'),
                 onTap: () {
@@ -283,7 +284,7 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                   _dialNumber('130');
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
             ],
           ),
         );
@@ -298,19 +299,19 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: EdgeInsets.symmetric(horizontal: 24.0.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SosButton(onTriggered: _isLocating ? () {} : _triggerSos),
-            const SizedBox(height: 40),
+            SizedBox(height: 40.h),
 
             // Status Indicator Card
             InkWell(
               onTap: _isLocating ? null : _refreshLocation,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
               child: Container(
-                padding: const EdgeInsets.all(24),
+                padding: EdgeInsets.all(24.w),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surface,
                   border: Border.all(
@@ -318,12 +319,12 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                         ? theme.colorScheme.primary.withValues(alpha: 0.3)
                         : theme.colorScheme.outlineVariant,
                   ),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.05),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
+                      blurRadius: 10.r,
+                      offset: Offset(0, 4.h),
                     ),
                   ],
                 ),
@@ -333,8 +334,8 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 8,
-                          height: 8,
+                          width: 8.w,
+                          height: 8.w,
                           decoration: BoxDecoration(
                             color: hasLocationLock
                                 ? theme.colorScheme.primary
@@ -342,7 +343,7 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                             shape: BoxShape.circle,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8.w),
                         Text(
                           _isLocating
                               ? 'PROCESSING...'
@@ -356,10 +357,10 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                           ),
                         ),
                         if (!_isLocating) ...[
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8.w),
                           Icon(
                             Icons.refresh,
-                            size: 16,
+                            size: 16.w,
                             color: hasLocationLock
                                 ? theme.colorScheme.primary
                                 : theme.colorScheme.secondary,
@@ -367,22 +368,22 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                         ],
                       ],
                     ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
                     _locationStatus,
                     style: theme.textTheme.titleMedium,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.h),
                   if (_isLocating && !hasLocationLock)
-                    const Padding(
-                      padding: EdgeInsets.only(top: 8.0),
-                      child: LinearProgressIndicator(),
+                    Padding(
+                      padding: EdgeInsets.only(top: 8.0.h),
+                      child: const LinearProgressIndicator(),
                     )
                   else if (!hasLocationLock)
-                    const Padding(
-                      padding: EdgeInsets.only(top: 8.0),
-                      child: LinearProgressIndicator(
+                    Padding(
+                      padding: EdgeInsets.only(top: 8.0.h),
+                      child: const LinearProgressIndicator(
                         value: null,
                       ), // Indeterminate for searching
                     ),
@@ -390,7 +391,7 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
               ),
             ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
 
             // Quick Secondary Actions
             Row(
@@ -398,28 +399,28 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
                 Expanded(
                   child: FilledButton.tonalIcon(
                     onPressed: _showNonEmergencyOptions,
-                    icon: const Icon(Icons.phone),
+                    icon: Icon(Icons.phone, size: 24.w),
                     label: const Text('Helplines'),
                     style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16.w),
                 Expanded(
                   child: FilledButton.tonalIcon(
                     onPressed: () {
                       Navigator.pushNamed(context, '/nearby');
                     },
-                    icon: const Icon(Icons.local_hospital),
+                    icon: Icon(Icons.local_hospital, size: 24.w),
                     label: const Text('Nearby Services'),
                     style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                     ),
                   ),

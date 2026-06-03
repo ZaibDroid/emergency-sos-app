@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SosButton extends StatefulWidget {
   final VoidCallback onTriggered;
@@ -57,13 +58,13 @@ class _SosButtonState extends State<SosButton>
                 child: Opacity(
                   opacity: _opacityAnimation.value,
                   child: Container(
-                    width: 320,
-                    height: 320,
+                    width: 320.w,
+                    height: 320.w,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: colorScheme.primary.withValues(alpha: 0.5),
-                        width: 4,
+                        width: 4.w,
                       ),
                     ),
                   ),
@@ -75,15 +76,15 @@ class _SosButtonState extends State<SosButton>
           GestureDetector(
             onLongPress: widget.onTriggered,
             child: Container(
-              width: 256,
-              height: 256,
+              width: 256.w,
+              height: 256.w,
               decoration: BoxDecoration(
                 color: colorScheme.primaryContainer,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
                     color: colorScheme.primary.withValues(alpha: 0.35),
-                    blurRadius: 40,
+                    blurRadius: 40.r,
                     spreadRadius: 0,
                   ),
                 ],
@@ -98,7 +99,7 @@ class _SosButtonState extends State<SosButton>
                       letterSpacing: 8.0,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   Text(
                     'HOLD TO ACTIVATE',
                     style: textTheme.labelMedium?.copyWith(
@@ -117,3 +118,4 @@ class _SosButtonState extends State<SosButton>
     );
   }
 }
+

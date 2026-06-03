@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,15 +38,15 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.shield, size: 100, color: Colors.white),
-            const SizedBox(height: 24),
+            Icon(Icons.shield, size: 100.w, color: Colors.white),
+            SizedBox(height: 24.h),
             Text(
               'Emergency SOS',
               style: Theme.of(
                 context,
               ).textTheme.displayLarge?.copyWith(color: Colors.white),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Text(
               'Your Safety Companion',
               style: Theme.of(

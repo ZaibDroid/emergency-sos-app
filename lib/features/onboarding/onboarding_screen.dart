@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -183,18 +184,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildProfilePage(ThemeData theme) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(24.0.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 40),
+          SizedBox(height: 40.h),
           Text(
             'Your Profile',
             style: theme.textTheme.headlineLarge,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text(
             'Set up your personal details before adding emergency contacts.',
             style: theme.textTheme.bodyLarge?.copyWith(
@@ -202,7 +203,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32.h),
           Center(
             child: GestureDetector(
               onTap: _pickImage,
@@ -210,62 +211,62 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 alignment: Alignment.bottomRight,
                 children: [
                   CircleAvatar(
-                    radius: 85,
+                    radius: 85.r,
                     backgroundColor: theme.colorScheme.surfaceContainerHighest,
                     backgroundImage: _profileImagePath != null 
                         ? FileImage(File(_profileImagePath!)) 
                         : null,
                     child: _profileImagePath == null
-                        ? Icon(Icons.person, size: 85, color: theme.colorScheme.primary)
+                        ? Icon(Icons.person, size: 85.w, color: theme.colorScheme.primary)
                         : null,
                   ),
                   CircleAvatar(
-                    radius: 26,
+                    radius: 26.r,
                     backgroundColor: theme.colorScheme.primary,
-                    child: Icon(Icons.camera_alt, size: 28, color: theme.colorScheme.onPrimary),
+                    child: Icon(Icons.camera_alt, size: 28.w, color: theme.colorScheme.onPrimary),
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32.h),
           TextField(
             controller: _nameController,
             decoration: InputDecoration(
               labelText: 'Your Full Name',
               prefixIcon: const Icon(Icons.person_outline),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
             textCapitalization: TextCapitalization.words,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           TextField(
             controller: _phoneController,
             decoration: InputDecoration(
               labelText: 'Your Phone Number',
               prefixIcon: const Icon(Icons.phone_android),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
             keyboardType: TextInputType.phone,
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32.h),
           ElevatedButton(
             onPressed: _nextPage,
             style: ElevatedButton.styleFrom(
               backgroundColor: theme.colorScheme.primary,
               foregroundColor: theme.colorScheme.onPrimary,
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: 16.h),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
             child: const Text('Next: Add Contacts'),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
         ],
       ),
     );
@@ -273,17 +274,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildContactsPage(ThemeData theme) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(24.0.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 48),
+          SizedBox(height: 48.h),
           Text(
             'Emergency Contacts',
             style: theme.textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             'Add up to 4 trusted people who will receive your SOS alerts.',
             style: theme.textTheme.bodyMedium?.copyWith(
@@ -291,7 +292,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           Expanded(
             child: _contacts.isEmpty
                 ? Center(
@@ -311,9 +312,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           side: BorderSide(color: theme.colorScheme.outlineVariant),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
-                        margin: const EdgeInsets.only(bottom: 12),
+                        margin: EdgeInsets.only(bottom: 12.h),
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundColor: theme.colorScheme.secondaryContainer,
@@ -343,26 +344,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               icon: const Icon(Icons.person_add),
               label: const Text('Add Contact'),
               style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: EdgeInsets.symmetric(vertical: 16.h),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
               ),
             ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           ElevatedButton(
             onPressed: _completeOnboarding,
             style: ElevatedButton.styleFrom(
               backgroundColor: theme.colorScheme.primary,
               foregroundColor: theme.colorScheme.onPrimary,
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: 16.h),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
             child: const Text('Finish Setup'),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
         ],
       ),
     );

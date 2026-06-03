@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../models/contact_model.dart';
 
 class ContactsScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 ),
                 textCapitalization: TextCapitalization.words,
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               TextField(
                 controller: phoneController,
                 decoration: const InputDecoration(
@@ -196,19 +197,19 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   children: [
                     Icon(
                       Icons.contact_phone_outlined,
-                      size: 64,
+                      size: 64.w,
                       color: theme.colorScheme.onSurfaceVariant.withValues(
                         alpha: 0.5,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.h),
                     Text(
                       'No Trusted Contacts Yet',
                       style: theme.textTheme.headlineSmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.h),
                     Text(
                       'Add people you trust to be notified\nduring an emergency.',
                       textAlign: TextAlign.center,
@@ -218,7 +219,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.h),
                     Text(
                       'You can add up to 5 contacts',
                       style: theme.textTheme.bodyMedium?.copyWith(
@@ -232,7 +233,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16.w),
                       itemCount: _contacts.length,
                       itemBuilder: (context, index) {
                         final contact = _contacts[index];
@@ -242,9 +243,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
                             side: BorderSide(
                               color: theme.colorScheme.outlineVariant,
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
-                          margin: const EdgeInsets.only(bottom: 12),
+                          margin: EdgeInsets.only(bottom: 12.h),
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundColor:
@@ -294,22 +295,22 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 84.0, // Extra padding so FAB doesn't cover it
-                      left: 16,
-                      right: 16,
+                    padding: EdgeInsets.only(
+                      bottom: 84.0.h, // Extra padding so FAB doesn't cover it
+                      left: 16.w,
+                      right: 16.w,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.info_outline,
-                          size: 16,
+                          size: 16.w,
                           color: _contacts.length >= 5 
                               ? theme.colorScheme.error.withValues(alpha: 0.7) 
                               : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8.w),
                         Flexible(
                           child: Text(
                             _contacts.length >= 5

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -41,7 +42,7 @@ class _AppDrawerState extends State<AppDrawer> {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 32,
+                  radius: 32.r,
                   backgroundColor: theme.colorScheme.primary,
                   backgroundImage: _profileImagePath != null
                       ? FileImage(File(_profileImagePath!))
@@ -50,11 +51,11 @@ class _AppDrawerState extends State<AppDrawer> {
                       ? Icon(
                           Icons.shield,
                           color: theme.colorScheme.onPrimary,
-                          size: 32,
+                          size: 32.w,
                         )
                       : null,
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16.w),
                 Expanded(
                   child: Text(
                     _userName,
@@ -69,14 +70,14 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
+            leading: Icon(Icons.home, size: 24.w),
             title: const Text('Home'),
             onTap: () {
               Navigator.pop(context); // Close the drawer
             },
           ),
           ListTile(
-            leading: const Icon(Icons.info),
+            leading: Icon(Icons.info, size: 24.w),
             title: const Text('About'),
             onTap: () {
               Navigator.pop(context); // Close the drawer

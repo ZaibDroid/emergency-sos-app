@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/widgets/custom_bottom_nav.dart';
 import '../sos/sos_home_screen.dart';
 import '../contacts/contacts_screen.dart';
@@ -60,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
                     return GestureDetector(
                       onTap: () => _onNavTap(3), // Navigate to Profile tab
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
+                        padding: EdgeInsets.only(right: 16.0.w),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -74,9 +75,9 @@ class _MainScreenState extends State<MainScreen> {
                                     ).colorScheme.primary,
                                   ),
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8.w),
                             CircleAvatar(
-                              radius: 18,
+                              radius: 18.r,
                               backgroundColor: Theme.of(
                                 context,
                               ).colorScheme.surfaceContainerHighest,
@@ -84,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
                                   ? FileImage(File(imagePath))
                                   : null,
                               child: imagePath == null
-                                  ? const Icon(Icons.person, size: 20)
+                                  ? Icon(Icons.person, size: 20.w)
                                   : null,
                             ),
                           ],
