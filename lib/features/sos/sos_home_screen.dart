@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/contact_model.dart';
 import '../../shared/widgets/sos_button.dart';
+import '../../shared/widgets/quick_action_button.dart';
 
 class SosHomeScreen extends StatefulWidget {
   const SosHomeScreen({super.key});
@@ -396,34 +397,19 @@ class _SosHomeScreenState extends State<SosHomeScreen> {
             // Quick Secondary Actions
             Row(
               children: [
-                Expanded(
-                  child: FilledButton.tonalIcon(
-                    onPressed: _showNonEmergencyOptions,
-                    icon: Icon(Icons.phone, size: 24.w),
-                    label: const Text('Helplines'),
-                    style: FilledButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                    ),
-                  ),
+                QuickActionButton(
+                  onPressed: _showNonEmergencyOptions,
+                  icon: Icons.phone,
+                  label: 'Helplines',
                 ),
                 SizedBox(width: 16.w),
-                Expanded(
-                  child: FilledButton.tonalIcon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/nearby');
-                    },
-                    icon: Icon(Icons.local_hospital, size: 24.w),
-                    label: const Text('Nearby Services'),
-                    style: FilledButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                    ),
-                  ),
+                QuickActionButton(
+                  onPressed: () {
+                    // We'll update this navigation to use go_router next
+                    Navigator.pushNamed(context, '/nearby');
+                  },
+                  icon: Icons.local_hospital,
+                  label: 'Nearby Services',
                 ),
               ],
             ),

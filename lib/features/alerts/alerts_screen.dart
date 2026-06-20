@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../shared/widgets/date_filter_button.dart';
 
 class AlertsScreen extends StatefulWidget {
   const AlertsScreen({super.key});
@@ -233,40 +234,16 @@ class _AlertsScreenState extends State<AlertsScreen> {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: _pickStartDate,
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                        alignment: Alignment.centerLeft,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(_startDate == null ? 'Start Date' : '${_startDate!.day}/${_startDate!.month}/${_startDate!.year}'),
-                          const Icon(Icons.arrow_drop_down),
-                        ],
-                      ),
-                    ),
+                  DateFilterButton(
+                    onPressed: _pickStartDate,
+                    date: _startDate,
+                    label: 'Start Date',
                   ),
                   const SizedBox(width: 12),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: _pickEndDate,
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                        alignment: Alignment.centerLeft,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(_endDate == null ? 'End Date' : '${_endDate!.day}/${_endDate!.month}/${_endDate!.year}'),
-                          const Icon(Icons.arrow_drop_down),
-                        ],
-                      ),
-                    ),
+                  DateFilterButton(
+                    onPressed: _pickEndDate,
+                    date: _endDate,
+                    label: 'End Date',
                   ),
                 ],
               ),

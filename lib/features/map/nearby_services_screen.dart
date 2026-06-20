@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../shared/widgets/service_category_chip.dart';
 
 class NearbyServicesScreen extends StatefulWidget {
   const NearbyServicesScreen({super.key});
@@ -257,31 +258,10 @@ class _NearbyServicesScreenState extends State<NearbyServicesScreen> {
             child: Row(
               children: _categories.map((category) {
                 final isSelected = _selectedCategoryType == category['type'];
-                return Padding(
-                  padding: EdgeInsets.only(right: 8.0.w),
-                  child: FilterChip(
-                    selected: isSelected,
-                    label: Text(category['label']),
-                    avatar: Icon(
-                      category['icon'],
-                      size: 18.w,
-                      color: isSelected
-                          ? theme.colorScheme.onSecondaryContainer
-                          : theme.colorScheme.onSurfaceVariant,
-                    ),
-                    onSelected: (bool selected) {
-                      if (selected) {
-                        _onCategorySelected(category['type']);
-                      }
-                    },
-                    backgroundColor: theme.colorScheme.surface,
-                    selectedColor: theme.colorScheme.secondaryContainer,
-                    labelStyle: TextStyle(
-                      color: isSelected
-                          ? theme.colorScheme.onSecondaryContainer
-                          : theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
+                return ServiceCategoryChip(
+                  category: category,
+                  isSelected: isSelected,
+                  onSelected: _onCategorySelected,
                 );
               }).toList(),
             ),
