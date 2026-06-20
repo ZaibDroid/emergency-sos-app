@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../../shared/widgets/custom_empty_state.dart';
 
 class PlacesList extends StatelessWidget {
   final bool isLoading;
@@ -27,11 +28,10 @@ class PlacesList extends StatelessWidget {
     }
 
     if (places.isEmpty) {
-      return Center(
-        child: Text(
-          'No places found nearby.',
-          style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-        ),
+      return const CustomEmptyState(
+        icon: Icons.search_off,
+        title: 'No places found',
+        subtitle: 'We couldn\'t find any services nearby.',
       );
     }
 

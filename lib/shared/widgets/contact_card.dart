@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../models/contact_model.dart';
+import 'initial_avatar.dart';
 
 class ContactCard extends StatelessWidget {
   final ContactModel contact;
@@ -25,15 +26,10 @@ class ContactCard extends StatelessWidget {
       ),
       margin: EdgeInsets.only(bottom: 12.h),
       child: ListTile(
-        leading: CircleAvatar(
+        leading: InitialAvatar(
+          name: contact.name,
           backgroundColor: theme.colorScheme.secondaryContainer,
-          child: Text(
-            contact.name.isNotEmpty ? contact.name[0].toUpperCase() : '?',
-            style: TextStyle(
-              color: theme.colorScheme.onSecondaryContainer,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          textColor: theme.colorScheme.onSecondaryContainer,
         ),
         title: Text(
           contact.name,

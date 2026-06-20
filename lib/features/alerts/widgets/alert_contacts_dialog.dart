@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../providers/user_provider.dart';
+import '../../../shared/widgets/initial_avatar.dart';
 
 class AlertContactsDialog extends StatelessWidget {
   final Map<String, dynamic> alert;
@@ -40,12 +41,8 @@ class AlertContactsDialog extends StatelessWidget {
         children: contacts.map((c) {
           return ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              child: Text(
-                c['name'] != null && c['name'].toString().isNotEmpty ? c['name'][0].toUpperCase() : '?',
-                style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
-              ),
+            leading: InitialAvatar(
+              name: c['name'] ?? 'Unknown',
             ),
             title: Text(c['name'] ?? 'Unknown'),
             subtitle: Text(c['phoneNumber'] ?? ''),

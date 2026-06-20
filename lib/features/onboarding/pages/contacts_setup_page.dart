@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../models/contact_model.dart';
 import '../../../shared/widgets/contact_card.dart';
 import '../../../shared/widgets/custom_button.dart';
+import '../../../shared/widgets/custom_empty_state.dart';
 
 class ContactsSetupPage extends StatelessWidget {
   final List<ContactModel> contacts;
@@ -38,14 +39,9 @@ class ContactsSetupPage extends StatelessWidget {
           SizedBox(height: 24.h),
           Expanded(
             child: contacts.isEmpty
-                ? Center(
-                    child: Text(
-                      'No contacts added yet.\nPress "Add Contact" to add a contact.',
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
-                      ),
-                    ),
+                ? const CustomEmptyState(
+                    title: 'No contacts added yet.',
+                    subtitle: 'Press "Add Contact" to add a contact.',
                   )
                 : ListView.builder(
                     itemCount: contacts.length,
