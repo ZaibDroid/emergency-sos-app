@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../providers/alerts_provider.dart';
 import '../../../shared/widgets/custom_button.dart';
+import '../../../shared/widgets/custom_badge.dart';
+import '../../../shared/widgets/custom_info_link.dart';
 import 'alert_contacts_dialog.dart';
 
 class AlertCard extends StatelessWidget {
@@ -91,36 +93,15 @@ class AlertCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      'Sent',
-                      style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSecondaryContainer),
-                    ),
-                  ),
+                  const CustomBadge(label: 'Sent'),
                 ],
               ),
               const SizedBox(height: 12),
-              InkWell(
+              CustomInfoLink(
+                text: status,
                 onTap: () {
                   AlertContactsDialog.show(context, alert);
                 },
-                borderRadius: BorderRadius.circular(4),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(status, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary, decoration: TextDecoration.underline)),
-                      const SizedBox(width: 4),
-                      Icon(Icons.info_outline, size: 16, color: theme.colorScheme.primary),
-                    ],
-                  ),
-                ),
               ),
               const SizedBox(height: 12),
               CustomButton(
