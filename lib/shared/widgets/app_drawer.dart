@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../shared/widgets/action_list_tile.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -69,16 +70,16 @@ class _AppDrawerState extends State<AppDrawer> {
               ],
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.home, size: 24.w),
-            title: const Text('Home'),
+          ActionListTile(
+            icon: Icons.home,
+            title: 'Home',
             onTap: () {
               Navigator.pop(context); // Close the drawer
             },
           ),
-          ListTile(
-            leading: Icon(Icons.info, size: 24.w),
-            title: const Text('About'),
+          ActionListTile(
+            icon: Icons.info,
+            title: 'About',
             onTap: () {
               Navigator.pop(context); // Close the drawer
             },

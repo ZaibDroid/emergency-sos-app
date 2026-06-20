@@ -1,12 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/widgets/custom_bottom_nav.dart';
 import '../sos/sos_home_screen.dart';
 import '../contacts/contacts_screen.dart';
 import '../alerts/alerts_screen.dart';
 import '../auth/settings_screen.dart';
+import 'widgets/user_profile_applet.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -45,54 +43,8 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: false,
         actions: _currentIndex == 0
             ? [
-                FutureBuilder<SharedPreferences>(
-                  future: SharedPreferences.getInstance(),
-                  builder: (context, snapshot) {
-                    String? imagePath;
-                    String userName = 'User';
-                    if (snapshot.hasData) {
-                      imagePath = snapshot.data!.getString('profileImagePath');
-                      userName = snapshot.data!.getString('userName') ?? 'User';
-                      // Extract first name if it's too long
-                      if (userName.contains(' ')) {
-                        userName = userName.split(' ')[0];
-                      }
-                    }
-                    return GestureDetector(
-                      onTap: () => _onNavTap(3), // Navigate to Profile tab
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 16.0.w),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Hi, $userName',
-                              style: Theme.of(context).textTheme.titleSmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                  ),
-                            ),
-                            SizedBox(width: 8.w),
-                            CircleAvatar(
-                              radius: 18.r,
-                              backgroundColor: Theme.of(
-                                context,
-                              ).colorScheme.surfaceContainerHighest,
-                              backgroundImage: imagePath != null
-                                  ? FileImage(File(imagePath))
-                                  : null,
-                              child: imagePath == null
-                                  ? Icon(Icons.person, size: 20.w)
-                                  : null,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+                UserProfileApplet(
+                  onTap: () => _onNavTap(3),
                 ),
               ]
             : null,

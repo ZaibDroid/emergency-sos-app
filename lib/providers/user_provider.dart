@@ -6,12 +6,14 @@ import '../models/contact_model.dart';
 class UserProvider extends ChangeNotifier {
   String _userName = '';
   String _userPhone = '';
+  String _emergencyMessage = 'URGENT: I need help! Here is my exact location:';
   String? _userProfileImagePath;
   List<ContactModel> _contacts = [];
   bool _isLoading = true;
 
   String get userName => _userName;
   String get userPhone => _userPhone;
+  String get emergencyMessage => _emergencyMessage;
   String? get userProfileImagePath => _userProfileImagePath;
   List<ContactModel> get contacts => _contacts;
   bool get isLoading => _isLoading;
@@ -24,6 +26,7 @@ class UserProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _userName = prefs.getString('userName') ?? '';
     _userPhone = prefs.getString('userPhone') ?? '';
+    _emergencyMessage = prefs.getString('emergencyMessage') ?? 'URGENT: I need help! Here is my exact location:';
     _userProfileImagePath = prefs.getString('userProfileImagePath');
 
     final String? contactsJson = prefs.getString('trusted_contacts');
@@ -57,11 +60,34 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> saveEmergencyMessage(String message) async {
+    _emergencyMessage = message;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('emergencyMessage', message);
+    notifyListeners();
+  }
+
+  Future<void> updateProfileImage(String imagePath) async {
+    _userProfileImagePath = imagePath;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userProfileImagePath', imagePath);
+    notifyListeners();
+  }
+
   Future<void> addContact(ContactModel contact) async {
-    if (_contacts.length >= 4) return;
+    if (_contacts.length >= 5) return;
     _contacts.add(contact);
     await _saveContactsToPrefs();
     notifyListeners();
+  }
+
+  Future<void> updateContact(ContactModel updatedContact) async {
+    final index = _contacts.indexWhere((c) => c.id == updatedContact.id);
+    if (index != -1) {
+      _contacts[index] = updatedContact;
+      await _saveContactsToPrefs();
+      notifyListeners();
+    }
   }
 
   Future<void> removeContact(String id) async {
@@ -82,10 +108,5 @@ class UserProvider extends ChangeNotifier {
       _contacts.map((c) => c.toJson()).toList(),
     );
     await prefs.setString('trusted_contacts', encodedContacts);
-  }
-  
-  Future<void> completeOnboarding() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('onboardingCompleted', true);
   }
 }

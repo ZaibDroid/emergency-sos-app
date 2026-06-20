@@ -6,6 +6,7 @@ class CustomButton extends StatelessWidget {
   final String label;
   final IconData? icon;
   final bool isOutlined;
+  final bool isFullWidth;
 
   const CustomButton({
     super.key,
@@ -13,15 +14,18 @@ class CustomButton extends StatelessWidget {
     required this.label,
     this.icon,
     this.isOutlined = false,
+    this.isFullWidth = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    Widget button;
+
     if (isOutlined) {
       if (icon != null) {
-        return OutlinedButton.icon(
+        button = OutlinedButton.icon(
           onPressed: onPressed,
           icon: Icon(icon),
           label: Text(label),
@@ -32,46 +36,56 @@ class CustomButton extends StatelessWidget {
             ),
           ),
         );
+      } else {
+        button = OutlinedButton(
+          onPressed: onPressed,
+          style: OutlinedButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+          ),
+          child: Text(label),
+        );
       }
-      return OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 16.h),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
+    } else {
+      if (icon != null) {
+        button = ElevatedButton.icon(
+          onPressed: onPressed,
+          icon: Icon(icon),
+          label: Text(label),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: theme.colorScheme.primary,
+            foregroundColor: theme.colorScheme.onPrimary,
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
           ),
-        ),
-        child: Text(label),
-      );
+        );
+      } else {
+        button = ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: theme.colorScheme.primary,
+            foregroundColor: theme.colorScheme.onPrimary,
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+          ),
+          child: Text(label),
+        );
+      }
     }
 
-    if (icon != null) {
-      return ElevatedButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon),
-        label: Text(label),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: theme.colorScheme.primary,
-          foregroundColor: theme.colorScheme.onPrimary,
-          padding: EdgeInsets.symmetric(vertical: 16.h),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-        ),
+    if (isFullWidth) {
+      return SizedBox(
+        width: double.infinity,
+        child: button,
       );
     }
-
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: theme.colorScheme.primary,
-        foregroundColor: theme.colorScheme.onPrimary,
-        padding: EdgeInsets.symmetric(vertical: 16.h),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-      ),
-      child: Text(label),
-    );
+    
+    return button;
   }
 }
