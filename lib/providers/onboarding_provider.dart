@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../models/contact_model.dart';
 import '../core/services/storage_service.dart';
+import '../core/utils/input_validator.dart';
 import 'user_provider.dart';
 
 class OnboardingProvider extends ChangeNotifier {
@@ -58,12 +59,12 @@ class OnboardingProvider extends ChangeNotifier {
         Fluttertoast.showToast(msg: 'Please select a profile picture', gravity: ToastGravity.BOTTOM);
         return;
       }
-      if (nameController.text.trim().isEmpty) {
-        Fluttertoast.showToast(msg: 'Please enter your full name', gravity: ToastGravity.BOTTOM);
+      if (!InputValidator.isValidName(nameController.text.trim())) {
+        Fluttertoast.showToast(msg: 'Please enter a valid full name', gravity: ToastGravity.BOTTOM);
         return;
       }
-      if (phoneController.text.trim().isEmpty) {
-        Fluttertoast.showToast(msg: 'Please enter your phone number', gravity: ToastGravity.BOTTOM);
+      if (!InputValidator.isValidPhone(phoneController.text.trim())) {
+        Fluttertoast.showToast(msg: 'Please enter a valid phone number', gravity: ToastGravity.BOTTOM);
         return;
       }
       pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
@@ -76,8 +77,8 @@ class OnboardingProvider extends ChangeNotifier {
       return;
     }
 
-    final name = nameController.text.trim();
-    final phone = phoneController.text.trim();
+    final name = InputValidator.sanitizeText(nameController.text);
+    final phone = InputValidator.sanitizeText(phoneController.text);
     
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     

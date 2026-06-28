@@ -130,6 +130,8 @@ class ProfileHeader extends StatelessWidget {
                 label: 'Edit Profile',
                 isOutlined: true,
                 isFullWidth: false,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                borderRadius: BorderRadius.circular(30),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../../core/utils/input_validator.dart';
 import '../../../providers/user_provider.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
@@ -35,10 +36,13 @@ class _EditMessageDialogState extends State<EditMessageDialog> {
   }
 
   void _handleSave() {
-    final msg = _msgController.text.trim();
+    final msg = InputValidator.sanitizeText(_msgController.text);
     if (msg.isNotEmpty) {
       context.read<UserProvider>().saveEmergencyMessage(msg);
       Fluttertoast.showToast(msg: 'Emergency message saved!');
+    } else {
+      Fluttertoast.showToast(msg: 'Message cannot be empty');
+      return;
     }
     Navigator.pop(context);
   }

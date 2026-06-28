@@ -8,6 +8,9 @@ class CustomButton extends StatelessWidget {
   final bool isOutlined;
   final bool isFullWidth;
 
+  final EdgeInsetsGeometry? padding;
+  final BorderRadiusGeometry? borderRadius;
+
   const CustomButton({
     super.key,
     required this.onPressed,
@@ -15,6 +18,8 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.isOutlined = false,
     this.isFullWidth = true,
+    this.padding,
+    this.borderRadius,
   });
 
   @override
@@ -30,9 +35,9 @@ class CustomButton extends StatelessWidget {
           icon: Icon(icon),
           label: Text(label),
           style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
+            padding: padding ?? EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: borderRadius ?? BorderRadius.circular(12.r),
             ),
           ),
         );
@@ -40,9 +45,9 @@ class CustomButton extends StatelessWidget {
         button = OutlinedButton(
           onPressed: onPressed,
           style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
+            padding: padding ?? EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: borderRadius ?? BorderRadius.circular(12.r),
             ),
           ),
           child: Text(label),
@@ -57,9 +62,9 @@ class CustomButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: theme.colorScheme.primary,
             foregroundColor: theme.colorScheme.onPrimary,
-            padding: EdgeInsets.symmetric(vertical: 16.h),
+            padding: padding ?? EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: borderRadius ?? BorderRadius.circular(12.r),
             ),
           ),
         );
@@ -69,9 +74,9 @@ class CustomButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: theme.colorScheme.primary,
             foregroundColor: theme.colorScheme.onPrimary,
-            padding: EdgeInsets.symmetric(vertical: 16.h),
+            padding: padding ?? EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: borderRadius ?? BorderRadius.circular(12.r),
             ),
           ),
           child: Text(label),

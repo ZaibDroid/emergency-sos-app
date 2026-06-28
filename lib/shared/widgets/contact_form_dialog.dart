@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../core/utils/input_validator.dart';
 import '../../models/contact_model.dart';
 import 'custom_text_field.dart';
 
@@ -39,11 +40,11 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
   }
 
   void _handleSave() {
-    final name = _nameController.text.trim();
-    final phone = _phoneController.text.trim();
+    final name = InputValidator.sanitizeText(_nameController.text);
+    final phone = InputValidator.sanitizeText(_phoneController.text);
 
-    if (name.isEmpty || phone.isEmpty) {
-      Fluttertoast.showToast(msg: 'Please enter both name and phone number');
+    if (!InputValidator.isValidName(name) || !InputValidator.isValidPhone(phone)) {
+      Fluttertoast.showToast(msg: 'Please enter a valid name and phone number');
       return;
     }
 

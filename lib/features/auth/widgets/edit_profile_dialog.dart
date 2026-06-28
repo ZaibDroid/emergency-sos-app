@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import '../../../core/utils/input_validator.dart';
 import '../../../providers/user_provider.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
@@ -37,16 +39,19 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
   }
 
   void _handleSave() {
-    final name = _nameController.text.trim();
-    final phone = _phoneController.text.trim();
+    final name = InputValidator.sanitizeText(_nameController.text);
+    final phone = InputValidator.sanitizeText(_phoneController.text);
 
-    if (name.isNotEmpty) {
-      context.read<UserProvider>().saveUserProfile(
-        name: name,
-        phone: phone,
-        imagePath: context.read<UserProvider>().userProfileImagePath,
-      );
+    if (!InputValidator.isValidName(name) || !InputValidator.isValidPhone(phone)) {
+      Fluttertoast.showToast(msg: 'Please enter a valid name and phone number');
+      return;
     }
+
+    context.read<UserProvider>().saveUserProfile(
+      name: name,
+      phone: phone,
+      imagePath: context.read<UserProvider>().userProfileImagePath,
+    );
     Navigator.pop(context);
   }
 

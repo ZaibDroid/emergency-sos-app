@@ -45,11 +45,11 @@ class PlacesService {
         final data = json.decode(response.body);
         return data['elements'] as List;
       } else {
-        debugPrint('Overpass API Error: ${response.statusCode}');
+        // Overpass API Error
         return [];
       }
     } catch (e) {
-      debugPrint('HTTP Error: $e');
+      // HTTP Error
       return [];
     }
   }

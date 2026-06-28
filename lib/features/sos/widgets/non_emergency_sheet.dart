@@ -32,9 +32,11 @@ class NonEmergencySheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final helplines = [
-      {'icon': Icons.local_police, 'title': 'Police Helpline', 'subtitle': 'Dial 15', 'number': '15'},
+      {'icon': Icons.local_police, 'title': 'Police', 'subtitle': 'Dial 15', 'number': '15'},
       {'icon': Icons.medical_services, 'title': 'Edhi Ambulance', 'subtitle': 'Dial 115', 'number': '115'},
+      {'icon': Icons.medical_services, 'title': 'Chhipa Ambulance', 'subtitle': 'Dial 1020', 'number': '1020'},
       {'icon': Icons.car_crash, 'title': 'Motorway Police', 'subtitle': 'Dial 130', 'number': '130'},
+      {'icon': Icons.medical_services, 'title': '1122 Ambulance', 'subtitle': 'Dial 1122', 'number': '1122'},
     ];
 
     return SafeArea(
@@ -56,19 +58,6 @@ class NonEmergencySheet extends StatelessWidget {
               _dialNumber(helpline['number'] as String);
             },
           )),
-          const SizedBox(height: 32),
-          CustomButton(
-            onPressed: () => _dialNumber('112'),
-            icon: Icons.phone,
-            label: 'Call 112 (General)',
-          ),
-          const SizedBox(height: 12),
-          CustomButton(
-            onPressed: () => _dialNumber('15'),
-            icon: Icons.local_police,
-            label: 'Call 15 (Police)',
-            isOutlined: true,
-          ),
           SizedBox(height: 16.h),
         ],
       ),

@@ -51,7 +51,7 @@ class NearbyProvider extends ChangeNotifier {
 
       await fetchPlaces();
     } catch (e) {
-      debugPrint('Error getting location: $e');
+      // Error getting location
       _isLoading = false;
       notifyListeners();
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../shared/widgets/custom_empty_state.dart';
 
 class PlacesList extends StatelessWidget {
@@ -42,7 +43,23 @@ class PlacesList extends StatelessWidget {
         final place = places[index];
         final tags = place['tags'] ?? {};
         final name = tags['name'] ?? 'Unnamed Service';
-        final address = tags['addr:full'] ?? tags['addr:street'] ?? 'Address not available';
+        String address = '';
+        if (tags['addr:full'] != null) {
+          address = tags['addr:full'];
+        } else {
+          final street = tags['addr:street'];
+          final housenumber = tags['addr:housenumber'];
+          final city = tags['addr:city'];
+          List<String> parts = [];
+          if (housenumber != null) parts.add(housenumber);
+          if (street != null) parts.add(street);
+          if (city != null) parts.add(city);
+          if (parts.isNotEmpty) {
+            address = parts.join(', ');
+          } else {
+            address = tags['operator'] ?? tags['brand'] ?? 'Address not available';
+          }
+        }
         
         double lat = 0.0;
         double lon = 0.0;
@@ -82,7 +99,17 @@ class PlacesList extends StatelessWidget {
             title: Text(name, style: theme.textTheme.labelLarge),
             subtitle: Text('$distanceText\n$address', style: theme.textTheme.bodyMedium),
             isThreeLine: true,
-            trailing: const Icon(Icons.directions),
+            trailing: IconButton(
+              icon: const Icon(Icons.directions),
+              color: theme.colorScheme.primary,
+              onPressed: () async {
+                // Using standard web URL format prevents Google Maps from snapping to a different POI
+                final uri = Uri.parse('https://www.google.com/maps/dir/?api=1&destination=$lat,$lon');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                }
+              },
+            ),
             onTap: () => onPlaceTap(lat, lon),
           ),
         );
