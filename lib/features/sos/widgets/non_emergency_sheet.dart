@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../shared/widgets/action_list_tile.dart';
-import '../../../shared/widgets/custom_button.dart';
 
 class NonEmergencySheet extends StatelessWidget {
   const NonEmergencySheet({super.key});

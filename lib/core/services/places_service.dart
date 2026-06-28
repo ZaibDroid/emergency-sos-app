@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart';
 
 class PlacesService {
   String _buildOverpassQuery(double lat, double lng, String type) {
@@ -45,11 +44,9 @@ class PlacesService {
         final data = json.decode(response.body);
         return data['elements'] as List;
       } else {
-        // Overpass API Error
         return [];
       }
     } catch (e) {
-      // HTTP Error
       return [];
     }
   }
